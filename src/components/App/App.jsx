@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import Header from '../Header/Header';
 import './App.css';
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
     <CurrentUserContext.Provider>
       <div className="page">
         Диплом о Себе
-        {/* <Header /> */}
+        <Header />
         <Switch>
           <Route
               exact 
