@@ -48,3 +48,59 @@
   cursor: pointer;
   opacity: 0.6;
 }
+
+@media (min-width: 620px) {
+  .promo__image {
+    width: 310px;
+    height: 304px;
+    margin: 140px 229px 48px;
+  }
+
+  .promo__title {
+    font-size: 40px;
+    line-height: 50px;
+    padding: 0 44px;
+    letter-spacing: 0;
+  }
+
+  .promo__description {
+    padding: 22px 0 92px;
+    max-width: 260px;
+  }
+
+  .promo__button {
+    margin-bottom: 76px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .promo {
+    align-items: flex-start;
+  }
+
+  .promo__image {
+    position: absolute;
+    margin: 149px 79px 0 0;
+    top: 0;
+    right: 0;
+  }
+
+  .promo__title {
+    max-width: 640px;
+    font-size: 50px;
+    line-height: 58px;
+    text-align: left;
+    padding: 75px 190px 0 70px;
+  }
+
+  .promo__description {
+    padding: 36px 0 146px 70px;
+    max-width: 260px;
+    text-align: left;
+  }
+
+  .promo__button {
+    margin-bottom: 75px;
+    margin-left: 70px;
+  }
+}
