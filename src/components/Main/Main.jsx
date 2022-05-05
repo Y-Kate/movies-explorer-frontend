@@ -6,10 +6,10 @@ import './Main.css'
 function Main() {
 
   return (
-  <div className="main">
-    < Promo />
-    < AboutProject />
-  </div>
+    <div className="main">
+      < Promo />
+      < AboutProject />
+    </div>
   );
 }
 
