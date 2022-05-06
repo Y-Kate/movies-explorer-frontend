@@ -16,10 +16,10 @@ function App() {
             path="/"
             component={Main} >
           </Route>
-          <Route path="/sign-in">
+          <Route path="/signin">
               Логин
           </Route>
-          <Route path="/sign-up">
+          <Route path="/signup">
             Пароль
           </Route>
         </Switch>

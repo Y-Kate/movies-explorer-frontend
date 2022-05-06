@@ -3,8 +3,6 @@
   flex-direction: column;
   box-sizing: border-box;
   padding: 14px 18px 70px;
-  color: #FFF;
-  background-color: #202020;
 }
 
 .about-project__title {
@@ -17,7 +15,7 @@
 
 .underscores {
   border-bottom: 1px solid #DADADA;
-  height: 50px;
+  min-height: 50px;
 }
 
 .about-project__description {
