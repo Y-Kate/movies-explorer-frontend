@@ -5,7 +5,7 @@
   padding: 14px 18px 70px;
 }
 
-.about-project__title {
+/* .about-project__title {
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
@@ -16,7 +16,7 @@
 .underscores {
   border-bottom: 1px solid #DADADA;
   min-height: 50px;
-}
+} */
 
 .about-project__description {
   font-size: 11px;

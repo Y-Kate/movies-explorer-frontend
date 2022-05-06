@@ -5,7 +5,7 @@
   padding: 70px 18px 70px;
 }
 
-.techs__title {
+/* .techs__title {
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
@@ -13,7 +13,7 @@
   margin: 0;
   border-bottom: 1px solid #000;
   height: 50px;
-}
+} */
 
 .techs__content {
   display: flex;
@@ -63,11 +63,11 @@
     padding: 90px 50px 90px;
   }
 
-  .techs__title {
+  /* .techs__title {
     font-size: 22px;
     line-height: 26px;
     height: 50px;
-  }
+  } */
   
   .techs__subtitle {
     font-size: 50px;
@@ -93,9 +93,9 @@
     padding: 100px 70px 10px;
   }
 
-  .techs__title {
+  /* .techs__title {
     line-height: 27px;
-  }
+  } */
   
   .techs__subtitle {
     margin: 90px 0 26px;
