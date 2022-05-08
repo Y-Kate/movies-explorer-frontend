@@ -6,7 +6,6 @@ function Portfolio() {
   return (
     <section className="portfolio">
       <h2 className="portfolio__title">Портфолио</h2>
-      {/* <div className="portfolio__content"> */}
         <ul className="portfolio__list">
           <li className="portfolio__list-item">
             <a href="https://y-kate.github.io/how-to-learn/" className="portfolio__link" target="_blank" rel="noreferrer">
@@ -24,7 +23,6 @@ function Portfolio() {
             </a>
           </li>
         </ul>
-      {/* </div> */}
     </section>
   );
 }

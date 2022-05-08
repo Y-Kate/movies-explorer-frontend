@@ -9,7 +9,6 @@ function App() {
   return (
     <CurrentUserContext.Provider>
       <div className="page">
-        Диплом о Себе
         <Header />
         <Switch>
           <Route
