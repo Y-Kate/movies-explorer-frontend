@@ -3,7 +3,6 @@ import React, { useState} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
@@ -17,7 +16,6 @@ function App() {
   return (
     <CurrentUserContext.Provider value={ currentUser }>
       <div className="page">
-        <Header />
         <Switch>
           <Route
             exact 

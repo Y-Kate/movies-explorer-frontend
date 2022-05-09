@@ -5,17 +5,21 @@ import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
 import Portfolio from '../Portfolio/Portfolio';
 import './Main.css'
+import Header from '../Header/Header';
 
 function Main() {
 
   return (
-    <div className="main">
-      < Promo />
-      < AboutProject />
-      < Techs />
-      < AboutMe />
-      < Portfolio />
-    </div>
+    <>
+      <Header isMainPage={true}/>
+      <div className="main">
+        < Promo />
+        < AboutProject />
+        < Techs />
+        < AboutMe />
+        < Portfolio />
+      </div>
+    </>
   );
 }
 

@@ -1,12 +1,17 @@
 import React from 'react';
+import Header from '../Header/Header';
+import SearchForm from '../SearchForm/SearchForm'
 import './Movies.css'
 
 function Movies() {
 
   return (
-    <div className="main">
-Rbyj
-    </div>
+    <>
+      <Header isMainPage={false}/>
+      <div className="movies">
+        <SearchForm />
+      </div>
+    </>
   );
 }
 
