@@ -15,8 +15,9 @@ function SearchForm() {
         placeholder="Фильм" 
         className="search-form__input"/>
         <button className="search-form__button" type="submit">Поиск</button>
-        </div>
+      </div>
       <FilterCheckbox />
+      <hr className="search-form__underline"/>
     </div>
   );
 }

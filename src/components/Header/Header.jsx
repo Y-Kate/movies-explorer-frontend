@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom'
 import logo from '../../images/logo.svg';
+import account from '../../images/account.svg'
 import './Header.css'
 
 function Header({ isMainPage }) {
@@ -21,6 +23,17 @@ function Header({ isMainPage }) {
             </> :
             <>
               <button className="header__burger-menu"></button>
+              <div className="header__registered">
+                <div className="header__navigation">
+                  <NavLink to="/movies" className="header__link">
+                    Фильмы
+                  </NavLink>
+                  <NavLink to="/saved-movies" className="header__link">
+                    Сохранённые фильмы
+                  </NavLink>
+                </div>
+                <button className="header__button-enter">Аккаунт<img src={account} alt="Аккаунт" className="header__account-logo"/></button>
+              </div>
             </>
           }
         </div>

@@ -22,6 +22,8 @@
 .header__container {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .header__button {
@@ -60,9 +62,13 @@
   border: none;
 }
 
-.header__burger-menu:hover {
+.header__button:hover {
   cursor: pointer;
   opacity: 0.6;
+}
+
+.header__registered {
+  display: none;
 }
 
 @media (min-width: 620px) {
@@ -81,9 +87,47 @@
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1100px) {
   .header {
     padding: 18px 70px;
   }
 
+  .header__burger-menu {
+    display: none;
+  }
+
+  .header__registered {
+    display: flex;
+    justify-content: space-between;
+    flex: 1 1 auto;
+    align-items: center;
+    padding: 0 44px;
+  }
+
+  .header__link {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 500;
+    padding-right: 16px;
+  }
+
+  .header__button-enter {
+    font-size: 13px;
+    line-height: 12px;
+    font-weight: 500;
+    color: #FFF;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .header__account-logo {
+    padding-left: 7px;
+    width: 26px;
+    height: 26px;
+  }
 }

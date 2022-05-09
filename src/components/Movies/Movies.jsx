@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from '../Header/Header';
-import SearchForm from '../SearchForm/SearchForm'
-import './Movies.css'
+import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import './Movies.css';
 
 function Movies() {
 
@@ -10,6 +11,7 @@ function Movies() {
       <Header isMainPage={false}/>
       <div className="movies">
         <SearchForm />
+        <MoviesCardList />
       </div>
     </>
   );
