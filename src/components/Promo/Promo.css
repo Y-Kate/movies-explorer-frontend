@@ -80,11 +80,12 @@
 @media (min-width: 1100px) {
   .promo {
     align-items: flex-start;
+    padding: 0 2px;
   }
 
   .promo__image {
     position: absolute;
-    margin: 149px 79px 0 0;
+    margin: 149px 70px 0 0;
     top: 0;
     right: 0;
   }

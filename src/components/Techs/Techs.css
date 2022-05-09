@@ -50,7 +50,8 @@
 
 @media (min-width: 680px) {
   .techs {
-    padding: 85px 50px 90px;
+    padding: 90px 50px 75px;
+    background-color: #272727;
   }
 
   .techs__subtitle {
@@ -70,17 +71,12 @@
     grid-template-rows: repeat(1, 57px);
     margin-top: 83px;
   }
-
 }
 
 @media (min-width: 1100px) {
   .techs {
-    padding: 100px 70px 10px;
+    padding: 100px 70px 85px;
   }
-
-  /* .techs__title {
-    line-height: 27px;
-  } */
   
   .techs__subtitle {
     margin: 90px 0 26px;
