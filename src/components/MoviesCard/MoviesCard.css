@@ -54,6 +54,10 @@
   background-image: url('../../images/heart-red.svg');
 }
 
+.movies-card__like_close {
+  background-image: url('../../images/close.svg');
+}
+
 .movies-card__underline {
   color: #AAAAAA;
   opacity: 0.2;

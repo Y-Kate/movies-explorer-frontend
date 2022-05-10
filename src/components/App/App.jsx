@@ -6,6 +6,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 import './App.css';
 
 function App() {
@@ -26,6 +27,12 @@ function App() {
             path="/movies"
             exact
             component={Movies}
+            isLoggedIn={isLoggedIn} //TODO удалить тут все и в rotectedRoute
+          />
+          <ProtectedRoute
+            path="/saved-movies"
+            exact
+            component={SavedMovies}
             isLoggedIn={isLoggedIn} //TODO удалить тут все и в rotectedRoute
           />
           <Route path="/signin">

@@ -3,7 +3,7 @@ import { filmsArray } from '../../utils/mock';
 import MoviesCard from '../MoviesCard/MoviesCard'
 import './MoviesCardList.css'
 
-function MoviesCardList() {
+function MoviesCardList( { isSaveMoviesPage } ) {
   const [renderFilmsArray, setRenderFilmsArray] = useState([]);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function MoviesCardList() {
     <section className="movies-list">
       <ul className="movies-list__container">
         {renderFilmsArray.map((film) => {
-          return <MoviesCard filmData={film}/>
+          return <MoviesCard filmData={film} isSaveMoviesPage={isSaveMoviesPage}/>
         })}
         
       </ul>
