@@ -3,16 +3,21 @@
   flex-direction: column;
 }
 
+.movies-card__link {
+  display: flex;
+  justify-content: center;
+  background-color: #222;
+}
+
 .movies-card__poster {
   max-width: 300px;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .movies-card__description {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-top: 20px;
 }
 
@@ -86,8 +91,9 @@
 @media (min-width: 1190px) {
   .movies-card__poster {
     max-width: 270px;
+    max-height: 151px;
+    object-fit: cover;
   }
-
   /* .movies-card__description {
     margin-top: 14px;
   }

@@ -32,7 +32,7 @@ function Header({ isMainPage }) {
                     Сохранённые фильмы
                   </NavLink>
                 </div>
-                <button className="header__button-enter">Аккаунт<img src={account} alt="Аккаунт" className="header__account-logo"/></button>
+                <button className="header__button-account">Аккаунт<img src={account} alt="Аккаунт" className="header__account-logo"/></button>
               </div>
             </>
           }
