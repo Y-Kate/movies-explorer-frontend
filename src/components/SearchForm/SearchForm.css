@@ -1,19 +1,20 @@
 .search-form {
   display: flex;
   flex-direction: column;
-  padding: 70px 14px 63px;
+  padding: 70px 14px 0;
 }
 
 .search-form__search-bar {
   display: flex;
   flex-direction: row;
   align-items: center;
+  box-sizing: border-box;
   justify-content: space-between;
   background-color: transparent;
   border: 1.5px solid rgba(255, 255, 255, .2);
   border-radius: 8px;
   height: 56px;
-  width: 100%;
+  min-width: 292px;
 }
 
 .search-form__input {
@@ -24,6 +25,7 @@
   font-weight: 400;
   border: none;
   padding: 20px 0 20px 12px;
+  width: calc(100% - 86px);
 }
 
 .search-form__input:focus {
@@ -99,5 +101,9 @@
     font-size: 18px;
     line-height: 20px;
     padding: 25px 0 25px 25px;
+  }
+
+  .search-form__underline {
+    margin-top: 42px;
   }
 }
