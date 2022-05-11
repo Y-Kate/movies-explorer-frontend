@@ -54,7 +54,6 @@
   font-size: 14px;
   line-height: 17px;
   padding-bottom: 9px;
-  margin-bottom: 24px;
 }
 
 .form-user__input_error {
@@ -66,12 +65,14 @@
 }
 
 .form-user__error {
+  margin-bottom: 24px;
   color: #EE3465;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
   padding: 0;
   align-self: flex-start;
+  min-height: 12px;
 }
 
 .form-user__button {
