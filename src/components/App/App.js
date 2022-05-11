@@ -8,6 +8,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
 import './App.css';
 
 function App() {
@@ -32,6 +33,12 @@ function App() {
             path="/saved-movies"
             exact
             component={SavedMovies}
+            isLoggedIn={isLoggedIn} //TODO удалить тут все и в rotectedRoute
+          />
+          <ProtectedRoute
+            path="/profile"
+            exact
+            component={Profile}
             isLoggedIn={isLoggedIn} //TODO удалить тут все и в rotectedRoute
           />
           <Route exact path="/signin">
