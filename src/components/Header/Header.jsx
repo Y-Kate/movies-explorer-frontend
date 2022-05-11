@@ -3,6 +3,7 @@ import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import './Header.css'
+import { NavLink } from 'react-router-dom';
 
 function Header({ isMainPage }) {
   const [bgColor, setBgColor] = useState('black')
@@ -21,9 +22,13 @@ function Header({ isMainPage }) {
         <div className="header__container">
           {isMainPage ? 
             <>
-              <button className="header__button">Регистрация</button>
-              <button className="header__button button-enter">Войти</button>
-            </> :
+            <NavLink to="/signup" className="header__button">
+              Регистрация
+            </NavLink>
+            <NavLink to="/signin" className="header__button button-enter">
+              Войти
+            </NavLink>
+             </> :
             <>
               <Navigation/>
             </>
