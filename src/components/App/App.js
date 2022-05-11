@@ -4,9 +4,9 @@ import { Route, Switch } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import Main from '../Main/Main';
-import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import Register from '../Register/Register';
 import './App.css';
 
 function App() {
@@ -18,10 +18,8 @@ function App() {
     <CurrentUserContext.Provider value={ currentUser }>
       <div className="page">
         <Switch>
-          <Route
-            exact 
-            path="/"
-            component={Main} >
+          <Route exact path="/">
+            <Main />
           </Route>
           <ProtectedRoute
             path="/movies"
@@ -35,14 +33,13 @@ function App() {
             component={SavedMovies}
             isLoggedIn={isLoggedIn} //TODO удалить тут все и в rotectedRoute
           />
-          <Route path="/signin">
-              Логин
+          <Route exact path="/signin">
+              <p>Авторизация</p>
           </Route>
-          <Route path="/signup">
-            Пароль
+          <Route exact path="/signup">
+            <Register />
           </Route>
         </Switch>
-        <Footer />
       </div>
     </CurrentUserContext.Provider>
   );

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import logo from '../../images/logo.svg';
 import account from '../../images/account.svg'
 import './Header.css'
+import { Link } from 'react-router-dom';
 
 function Header({ isMainPage }) {
   const [bgColor, setBgColor] = useState('black')
@@ -14,7 +15,10 @@ function Header({ isMainPage }) {
 
   return (
     <header className={`header header_bgcolor_${bgColor}`}>
-      <img src={logo} alt="Логотип" className="header__logo"/>
+      <Link to="/">
+        <img src={logo} alt="Логотип" className="header__logo"/>
+      </Link>
+      
         <div className="header__container">
           {isMainPage ? 
             <>
