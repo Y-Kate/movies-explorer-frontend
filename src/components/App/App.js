@@ -9,6 +9,7 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import './App.css';
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           <Route exact path="/signup">
             <Register />
           </Route>
+          <Route path="*" component={NotFoundPage} />
         </Switch>
       </div>
     </CurrentUserContext.Provider>

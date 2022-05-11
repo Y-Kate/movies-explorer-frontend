@@ -8,18 +8,18 @@ function Navigation() {
 
   return (
     <div className="navigation">
-      <button className="header__burger-menu"></button>
-      <div className="header__registered">
-        <div className="header__navigation">
-          <NavLink to="/movies" className="header__link">
+      <button className="navigation__burger-menu"></button>
+      <div className="navigation__registered">
+        <div className="navigation__links">
+          <NavLink to="/movies" className="navigation__link">
             Фильмы
           </NavLink>
-          <NavLink to="/saved-movies" className="header__link">
+          <NavLink to="/saved-movies" className="navigation__link">
             Сохранённые фильмы
           </NavLink>
         </div>
-        <NavLink to="/profile" className="header__link-account">
-          Аккаунт <img src={account} alt="Аккаунт" className="header__account-logo"/>
+        <NavLink to="/profile" className="navigation__link-account">
+          Аккаунт <img src={account} alt="Аккаунт" className="navigation__account-logo"/>
         </NavLink>
       </div>
     </div>
