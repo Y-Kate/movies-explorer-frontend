@@ -7,6 +7,7 @@ import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Register from '../Register/Register';
+import Login from '../Login/Login';
 import './App.css';
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
             isLoggedIn={isLoggedIn} //TODO удалить тут все и в rotectedRoute
           />
           <Route exact path="/signin">
-              <p>Авторизация</p>
+            <Login />
           </Route>
           <Route exact path="/signup">
             <Register />
