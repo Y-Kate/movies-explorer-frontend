@@ -7,10 +7,13 @@ function Register() {
 
   return (
     <section className="register">
-      <Link to="/" className="register__link">
+      {/* <Link to="/" className="register__link">
         <img src={logo} alt="Лого" className="register__logo" />
+      </Link> */}
+      <Link to="/" className="logo-link">
+        <img src={logo} alt="Лого" className="logo-link__image" />
       </Link>
-      <h2 className="register__title">Добро пожаловать!</h2>
+      <h2 className="form-title">Добро пожаловать!</h2>
       <form className="form-user">
         <label className="form-user__label">Имя</label>
         <input
@@ -47,7 +50,7 @@ function Register() {
           className="form-user__input form-user__input_error"/>
         <span className="form-user__error">Что-то пошло не так...</span>
         
-        <button className="form-user__button" type="submit">Зарегистрироваться</button>
+        <button className="form-user__button-register" type="submit">Зарегистрироваться</button>
         <p className="form-user__сaption"> Уже зарегистрированы? <a href="/sign-in" className="form-user__alredy">Войти</a>
         </p>
       </form>

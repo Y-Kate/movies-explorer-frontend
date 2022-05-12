@@ -28,7 +28,6 @@ function MoviesCardList( { isSaveMoviesPage } ) {
         {renderFilmsArray.map((film) => {
           return <MoviesCard filmData={film} isSaveMoviesPage={isSaveMoviesPage}/>
         })}
-        
       </ul>
       <button type="submit" className="movies-list__button">Ещё</button>
     </section>

@@ -9,7 +9,7 @@ function Promo() {
       <img src={planet_words} alt="Земля из слов WEB" className="promo__image"/>
       <h1 className="promo__title"> Учебный проект студента факультета Веб-разработки.</h1>
       <p className="promo__description"> Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
-      <button className="promo__button"> Узнать больше </button>
+      <a href="/#about-project" className="promo__link"> Узнать больше </a>
     </div>
   );
 }
