@@ -19,7 +19,7 @@ function Profile() {
               className="profile__input"
               />
           </label>
-        <span className="profile__error">Что-то пошло не так...</span>
+          <span className="profile__error"></span>
           <label className="profile__label">E-mail
             <input
             name="email"
@@ -28,7 +28,7 @@ function Profile() {
             className="profile__input"
             />
           </label>
-          {/* <span className="profile__error">Что-то пошло не так...</span> */}
+          <span className="profile__error">Что-то пошло не так...</span>
           <button className="profile__button" type="submit">Редактировать</button>
           <Link to="/signup" className="profile__link">
             <p className="profile__сaption">Выйти из аккаунта</p>

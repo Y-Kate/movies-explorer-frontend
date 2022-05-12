@@ -29,7 +29,7 @@
   font-weight: 500;
   align-self: flex-start;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
   min-width: 260px;
   height: 30px;
 }
@@ -70,6 +70,7 @@
   line-height: 12px;
   padding: 0;
   align-self: flex-start;
+  height: 12px;
 }
 
 .profile__button {

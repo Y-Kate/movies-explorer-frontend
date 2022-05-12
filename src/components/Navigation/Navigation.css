@@ -134,7 +134,7 @@
     background-color: transparent;
     flex: 1 1 auto;
     align-items: center;
-    padding: 0 0 0 44px;
+    padding: 0 0 6px 44px;
   }
 
   .navigation__links {
