@@ -30,7 +30,7 @@ function Profile() {
           </label>
           <span className="profile__error">Что-то пошло не так...</span>
           <button className="profile__button" type="submit">Редактировать</button>
-          <Link to="/signup" className="profile__link">
+          <Link to="/signin" className="profile__link">
             <p className="profile__сaption">Выйти из аккаунта</p>
           </Link>
         </form>

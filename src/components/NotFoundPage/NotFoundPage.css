@@ -55,6 +55,7 @@
   .not-found-page__text {
     font-size: 140px;
     line-height: 170px;
+    margin-bottom: 5px;
   }
   
   .not-found-page__title {
@@ -65,14 +66,13 @@
   .not-found-page__button-back {
     font-size: 14px;
     line-height: 17px;
-    margin-top: 176px;
+    margin-top: 182px;
   }
 }
 
 @media (min-width: 1100px) {
   .not-found-page {
-    padding: 0 440px 60px;
+    padding: 0 440px 58px;
     margin-top: 246px;
   }
-
 }

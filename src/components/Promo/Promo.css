@@ -57,7 +57,7 @@
   .promo__image {
     width: 310px;
     height: 304px;
-    margin: 140px 229px 48px;
+    margin: 136px 229px 48px;
   }
 
   .promo__title {
@@ -95,7 +95,7 @@
     font-size: 50px;
     line-height: 58px;
     text-align: left;
-    padding: 75px 190px 0 70px;
+    padding: 71px 190px 0 70px;
   }
 
   .promo__description {
@@ -107,5 +107,6 @@
   .promo__link {
     margin-bottom: 75px;
     margin-left: 70px;
+    padding: 9px 18px;
   }
 }

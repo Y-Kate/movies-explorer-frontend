@@ -71,12 +71,10 @@
     min-height: 32px;
     margin-left: 30px;
   }
-
 }
 
 @media (min-width: 1100px) {
   .header {
     padding: 18px 70px;
   }
-
 }

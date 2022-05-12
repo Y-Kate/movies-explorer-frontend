@@ -1,15 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../images/logo.svg'
+import logo from '../../images/logo.svg';
 import './Register.css';
 
 function Register() {
 
   return (
     <section className="register">
-      {/* <Link to="/" className="register__link">
-        <img src={logo} alt="Лого" className="register__logo" />
-      </Link> */}
       <Link to="/" className="logo-link">
         <img src={logo} alt="Лого" className="logo-link__image" />
       </Link>
@@ -51,7 +48,7 @@ function Register() {
         <span className="form-user__error">Что-то пошло не так...</span>
         
         <button className="form-user__button-register" type="submit">Зарегистрироваться</button>
-        <p className="form-user__сaption"> Уже зарегистрированы? <a href="/sign-in" className="form-user__alredy">Войти</a>
+        <p className="form-user__сaption"> Уже зарегистрированы? <a href="/signin" className="form-user__alredy">Войти</a>
         </p>
       </form>
     </section>

@@ -14,7 +14,7 @@ import './App.css';
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true); //TODO удалить
+  const [isLoggedIn, setIsLoggedIn] = useState(true); 
   const [currentUser, setCurrentUser] = useState({ name: "Имя пользователя"});
 
   return (
@@ -28,19 +28,19 @@ function App() {
             path="/movies"
             exact
             component={Movies}
-            isLoggedIn={isLoggedIn} //TODO удалить тут все и в rotectedRoute
+            isLoggedIn={isLoggedIn} 
           />
           <ProtectedRoute
             path="/saved-movies"
             exact
             component={SavedMovies}
-            isLoggedIn={isLoggedIn} //TODO удалить тут все и в rotectedRoute
+            isLoggedIn={isLoggedIn} 
           />
           <ProtectedRoute
             path="/profile"
             exact
             component={Profile}
-            isLoggedIn={isLoggedIn} //TODO удалить тут все и в rotectedRoute
+            isLoggedIn={isLoggedIn} 
           />
           <Route exact path="/signin">
             <Login />

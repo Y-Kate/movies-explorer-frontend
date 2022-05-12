@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom'
-import account from '../../images/account.svg'
-import './Navigation.css'
+import { NavLink } from 'react-router-dom';
+import account from '../../images/account.svg';
+import './Navigation.css';
 
 
 function Navigation() {

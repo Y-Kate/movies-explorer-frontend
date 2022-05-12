@@ -1,5 +1,5 @@
 import React from 'react';
-import './MoviesCard.css'
+import './MoviesCard.css';
 
 function MoviesCard({ filmData, isSaveMoviesPage }) {
   

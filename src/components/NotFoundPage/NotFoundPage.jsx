@@ -1,7 +1,6 @@
 
 import React from 'react';
-import Preloader from '../Preloader/Preloader';
-import './NotFoundPage.css'
+import './NotFoundPage.css';
 
 
 function NotFoundPage() {

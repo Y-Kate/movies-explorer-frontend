@@ -1,5 +1,5 @@
 import React from 'react';
-import './FilterCheckbox.css'
+import './FilterCheckbox.css';
 
 function FilterCheckbox() {
 

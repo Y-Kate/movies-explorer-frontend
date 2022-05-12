@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { filmsArray } from '../../utils/mock';
-import MoviesCard from '../MoviesCard/MoviesCard'
-import './MoviesCardList.css'
+import MoviesCard from '../MoviesCard/MoviesCard';
+import './MoviesCardList.css';
 
 function MoviesCardList( { isSaveMoviesPage } ) {
   const [renderFilmsArray, setRenderFilmsArray] = useState([]);
@@ -18,7 +18,6 @@ function MoviesCardList( { isSaveMoviesPage } ) {
     };
     console.log('array', array);
     setRenderFilmsArray(array);
-    
   }, [])
   
 

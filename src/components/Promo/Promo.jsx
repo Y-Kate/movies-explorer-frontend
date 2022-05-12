@@ -1,6 +1,6 @@
 import React from 'react';
 import planet_words from '../../images/planet_words.svg';
-import './Promo.css'
+import './Promo.css';
 
 function Promo() {
 
