@@ -2,10 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.logo-link__image {
-  margin: 56px 0 50px;
+  margin: 56px auto 50px;
 }
 
 .form-title {
@@ -117,10 +114,7 @@
   .logo-link  {
     align-items: center;
     justify-content: flex-start;
-  }
-
-  .logo-link__image  {
-    margin: 232px 0 40px;
+    margin: 232px auto 40px 0;
   }
 
   .form-title {
@@ -155,13 +149,9 @@
 
 @media (min-width: 1200px) {
   .logo-link {
-    margin: 55px 0 40px;
+    margin-top: 70px;
+    margin-bottom: 40px;
   }
-
-  .logo-link__image {
-    margin: 16px 0 0 0;
-  }
-  
 }
 /* .page {
   font-family: 'Inter', Arial, sans-serif;
