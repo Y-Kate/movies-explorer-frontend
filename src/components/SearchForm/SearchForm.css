@@ -11,7 +11,7 @@
   box-sizing: border-box;
   justify-content: space-between;
   background-color: transparent;
-  border: 1.5px solid rgba(255, 255, 255, .2);
+  border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 8px;
   height: 56px;
   min-width: 292px;
@@ -24,12 +24,13 @@
   line-height: 16px;
   font-weight: 400;
   border: none;
-  padding: 20px 0 20px 12px;
+  padding: 19px 0 19px 12px;
   width: calc(100% - 86px);
 }
 
 .search-form__input:focus {
   outline: none;
+  border-bottom: #4285F4 1px solid;
   box-shadow: none;
 }
 
@@ -73,7 +74,7 @@
   .search-form__input {
     font-size: 18px;
     line-height: 20px;
-    padding: 25px 0 20px 25px;
+    padding: 24px 0 19px 25px;
   }
   
   .search-form__button {
@@ -98,9 +99,7 @@
   }
 
   .search-form__input {
-    font-size: 18px;
-    line-height: 20px;
-    padding: 25px 0 25px 25px;
+    padding: 24px 0 24px 25px;
   }
 
   .search-form__underline {
