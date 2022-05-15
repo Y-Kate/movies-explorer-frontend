@@ -22,9 +22,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
-  margin-bottom: 30px;
   box-sizing: border-box;
+  max-width: 260px;
+  margin: 40px auto 30px;
 }
 
 .form-user__label {
@@ -126,6 +126,10 @@
   .form-title {
     text-align: start;
     margin: 0;
+  }
+
+  .form-user {
+    max-width: 396px;
   }
 
   .form-user__button {

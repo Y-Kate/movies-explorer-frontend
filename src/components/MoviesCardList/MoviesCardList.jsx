@@ -16,7 +16,6 @@ function MoviesCardList( { isSaveMoviesPage } ) {
     } else {
       array = filmsArray.slice(0, 5);
     };
-    console.log('array', array);
     setRenderFilmsArray(array);
   }, [])
   
@@ -28,7 +27,7 @@ function MoviesCardList( { isSaveMoviesPage } ) {
           return <MoviesCard filmData={film} isSaveMoviesPage={isSaveMoviesPage}/>
         })}
       </ul>
-      <button type="submit" className="movies-list__button">Ещё</button>
+      {!isSaveMoviesPage && <button type="submit" className="movies-list__button">Ещё</button>}
     </section>
   );
 }

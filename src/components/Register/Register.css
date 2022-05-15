@@ -26,7 +26,8 @@
 
 @media (min-width: 660px) {
   .register {
-    padding: 0 186px;
+    margin: 0 auto;
+    max-width: 396px;
   }
 
   .form-user__button-register {
@@ -34,11 +35,5 @@
     font-size: 14px;
     line-height: 17px;
     margin-top: 124px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .register {
-    padding: 0 442px;
   }
 }

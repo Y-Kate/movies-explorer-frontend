@@ -10,7 +10,7 @@ function Login() {
       <Link to="/" className="logo-link">
         <img src={logo} alt="Лого" className="logo-link__image" />
       </Link>
-        <h2 className="form-title">Рады видеть!</h2>
+      <h2 className="form-title">Рады видеть!</h2>
       <form className="form-user">
         <label className="form-user__label">E-mail</label>
         <input
