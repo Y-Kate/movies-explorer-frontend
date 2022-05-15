@@ -5,7 +5,7 @@ import './SearchForm.css';
 function SearchForm() {
 
   return (
-    <div className="search-form">
+    <form className="search-form">
       <div className="search-form__search-bar">
         <input 
         required
@@ -18,7 +18,7 @@ function SearchForm() {
       </div>
       <FilterCheckbox />
       <hr className="search-form__underline"/>
-    </div>
+    </form>
   );
 }
 
