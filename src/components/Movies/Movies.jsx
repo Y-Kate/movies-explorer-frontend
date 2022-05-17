@@ -1,4 +1,4 @@
-import React from 'react';
+import {  useState } from 'react';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
@@ -6,15 +6,22 @@ import Footer from '../Footer/Footer';
 import Preloader from '../Preloader/Preloader';
 import './Movies.css';
 
-function Movies() {
+function Movies({ allMovies }) {
+  const [errorText, setErrorText] = useState('');
+
+  const handleSearch = (searchValue, isShortFilm) => {
+    if (searchValue.length === 0) setErrorText('Нужно ввести ключевое слово')
+    else setErrorText('')
+    
+  }
 
   return (
     <>
       <Header isMainPage={false}/>
       <div className="movies">
-        <SearchForm />
+        <SearchForm handleSearch={handleSearch}/>
         {/* <Preloader /> */}
-        <MoviesCardList />
+        <MoviesCardList errorText={errorText} allMovies={allMovies}/>
       </div>
       <Footer/>
     </>

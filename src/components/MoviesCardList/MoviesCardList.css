@@ -8,7 +8,7 @@
 .movies-list__container {
   list-style-type: none;
   margin: 0;
-  padding: 0%;
+  padding: 0;
 }
 
 .movies-list__button {

@@ -1,16 +1,22 @@
 import React from 'react';
 import './FilterCheckbox.css';
 
-function FilterCheckbox() {
+function FilterCheckbox({ isShortFilm, setIsShortFilm }) {
+  const handleChange = () => {
+    setIsShortFilm(!isShortFilm)
+  }
 
   return (
     <div className="filter-checkbox">
         <input 
-        required
-        name="filterCheckbox"
-        id="filter-checkbox"
-        type="checkbox"
-        className="filter-checkbox__switch"/>
+          // required
+          name="filterCheckbox"
+          id="filter-checkbox"
+          type="checkbox"
+          className="filter-checkbox__switch"
+          onChange={handleChange}
+          checked={isShortFilm}
+        />
         <label className="filter-checkbox__label">Короткометражки</label>
     </div>
   );
