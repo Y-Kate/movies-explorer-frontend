@@ -1,8 +1,10 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import './MoviesCard.css';
 
-function MoviesCard({ filmData, isSaveMoviesPage }) {
-
+function MoviesCard({ filmData }) {
+  const { pathname } = useLocation();
+  
   const getTime = (duration) => {
     const hours = Math.floor(duration/60);
     const minutes = duration % 60;
@@ -16,13 +18,9 @@ function MoviesCard({ filmData, isSaveMoviesPage }) {
       </a>
       <div className="movies-card__description">
         <p className="movies-card__title">{filmData.nameRU}</p>
-        {isSaveMoviesPage ?
-          <>
-            <button type="button" className="movies-card__like movies-card__like_close" aria-label="Нравится" ></button>
-          </> :
-          <>
-            <button type="button" className={`movies-card__like movies-card__like${filmData.isLiked ? '_active' : '_save'}`} aria-label="Нравится" ></button>
-          </>
+        {pathname === "/movies"
+          ? <button type="button" className={`movies-card__like movies-card__like${filmData.isLiked ? '_active' : '_save'}`} aria-label="Нравится" ></button>
+          : <button type="button" className="movies-card__like movies-card__like_close" aria-label="Нравится" ></button>
         }
       </div>
       <hr className="movies-card__underline"/>

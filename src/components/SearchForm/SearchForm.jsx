@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
-function SearchForm({ handleSearch }) {
-  const [searchValue, setSearchValue] = useState('');
-  const [isShortFilm, setIsShortFilm] = useState(false);
+function SearchForm({ 
+  handleSearch,
+  searchValue,
+  setSearchValue,
+  isShortFilm,
+  setIsShortFilm
+}) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleSearch(searchValue, isShortFilm);
+    handleSearch();
   }
 
   const handleChangeSearchValue = (evt) => {
