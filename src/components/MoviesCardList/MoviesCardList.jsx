@@ -35,7 +35,7 @@ function MoviesCardList( { isSaveMoviesPage, errorText, allMovies } ) {
             return <MoviesCard filmData={film} isSaveMoviesPage={isSaveMoviesPage} key={`film-${i}`}/>
           })}
         </ul> :
-        <p>{errorText}</p>
+        <p className="movies-list__error">{errorText}</p>
       }
       {!isSaveMoviesPage && renderFilmsArray.length < allMovies.length && <button type="button" className="movies-list__button" onClick={handleClickButton}>Ещё</button>}
     </section>
