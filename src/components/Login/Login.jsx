@@ -1,9 +1,23 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
+import { useFormWithValidation } from '../../utils/formValidator';
 import './Login.css';
 
-function Login() {
+function Login({ handleLogin }) {
+  const { values, handleChange, errors, isValid, initRequiredFields } = useFormWithValidation();
+
+  useEffect(() => {
+    initRequiredFields({
+      email: '',
+      password: ''
+    })
+  }, [initRequiredFields]);
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    handleLogin(values);
+  }
 
   return (
     <section className="login">
@@ -11,18 +25,20 @@ function Login() {
         <img src={logo} alt="Лого" className="logo-link__image" />
       </Link>
       <h2 className="form-title">Рады видеть!</h2>
-      <form className="form-user">
+      <form className="form-user" onSubmit={handleSubmit}>
         <label className="form-user__label">E-mail</label>
         <input
-        required
-        name="email"
-        id="user-email"
-        type="email"
-        minLength="2"
-        maxLength="30"
-        className="form-user__input"
+          required
+          name="email"
+          id="user-email"
+          type="email"
+          minLength="2"
+          maxLength="30"
+          className={`form-user__input ${errors.email ? 'form-user__input_error' : ''}`}
+          values={values.email}
+          onChange={handleChange}
         />
-        <span className="form-user__error"></span>
+        <span className="form-user__error">{errors.email}</span>
         <label className="form-user__label">Пароль</label>
         <input
           required
@@ -31,9 +47,13 @@ function Login() {
           type="password"
           minLength="6"
           maxLength="30"
-          className="form-user__input form-user__input_error"/>
-        <span className="form-user__error"></span>
-        <button className="form-user__button" type="submit">Войти</button>
+          className={`form-user__input ${errors.password ? 'form-user__input_error' : ''}`}
+          values={values.password}
+          onChange={handleChange}
+        />
+        <span className="form-user__error">{errors.password}</span>
+
+        <button className="form-user__button" type="submit" disabled={!isValid}>Войти</button>
         <p className="form-user__сaption"> Еще не зарегистрированы? <a href="/signup" className="form-user__alredy">Регистрация</a>
         </p>
       </form>

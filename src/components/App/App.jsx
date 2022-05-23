@@ -1,5 +1,5 @@
 import { useEffect, useState} from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import Main from '../Main/Main';
@@ -12,12 +12,28 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { moviesApi } from '../../utils/MoviesApi';
 import { getConvertedMovies } from '../../utils/utils';
 import './App.css';
+import { mainApi } from '../../utils/MainApi';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true); 
-  const [currentUser, setCurrentUser] = useState({ name: "Имя пользователя"});
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [currentUser, setCurrentUser] = useState({});
   const [allMovies, setAllMovies] = useState([]); 
+  const history = useHistory();
 
+  function handleLogin(data) {
+    mainApi
+      .login(data)
+      .then((data) => {
+        setIsLoggedIn(true);
+        localStorage.setItem('jwt', data.token);
+        history.push('/movies');
+      })
+      .catch((err) => {
+        console.log('err', err.message);
+      });
+  }
+
+  // Получает все фильмы со стороннего api
   useEffect(() => {
     moviesApi.getMovies()
       .then((moviesArr) => {
@@ -27,6 +43,18 @@ function App() {
         console.log(`Произошла ошибка при загрузке фильмов - ${err}`)
       });
   }, []);
+  
+  useEffect(() => {
+    const token = localStorage.getItem('jwt')
+    Promise.all([mainApi.getUserData(token), mainApi.getSavedMovies(token)])
+      .then(([user, userMovies]) => {
+        // TODO userMovies
+        setCurrentUser(user.data);
+      })
+      .catch((err) => {
+        console.log(`Произошла ошибка ${err}`);
+      });
+  }, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={ currentUser }>
@@ -55,10 +83,10 @@ function App() {
             isLoggedIn={isLoggedIn} 
           />
           <Route exact path="/signin">
-            <Login />
+            <Login handleLogin={handleLogin} />
           </Route>
           <Route exact path="/signup">
-            <Register />
+            <Register handleLogin={handleLogin}/>
           </Route>
           <Route path="*" component={NotFoundPage} />
         </Switch>

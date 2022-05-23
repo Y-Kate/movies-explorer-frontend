@@ -5,7 +5,7 @@ import { useFormWithValidation } from '../../utils/formValidator';
 import { mainApi } from '../../utils/MainApi';
 import './Register.css';
 
-function Register() {
+function Register({ handleLogin }) {
   const { values, handleChange, errors, isValid, initRequiredFields } = useFormWithValidation();
   const [errorSubmit, setErrorSubmit] = useState('')
 
@@ -18,11 +18,13 @@ function Register() {
   }, [initRequiredFields])
 
   const handleRegister = (evt) => {
+    setErrorSubmit('');
+
     evt.preventDefault();
     mainApi.register(values)
       .then((data) => {
-
-      })
+        handleLogin({ email: values.email, password: values.password });
+      })  
       .catch((err) => {
         setErrorSubmit(err);
       })

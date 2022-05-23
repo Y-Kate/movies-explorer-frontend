@@ -87,6 +87,15 @@
   border-radius: 3px;
 }
 
+.form-user__button:disabled {
+  background-color: #999;
+}
+
+.form-user__button:disabled:hover {
+  cursor: default;
+  opacity: 1;
+}
+
 .form-user__button:hover {
   cursor: pointer;
   opacity: 0.85;

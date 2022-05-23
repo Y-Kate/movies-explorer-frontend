@@ -23,12 +23,45 @@ class MainApi {
       return Promise.reject(`Произошла ошибка: ${res.status}`);
     })
   };
+
+  login(dataUser) {
+    return fetch(`${this._baseUrl}/signin`, {
+      method: 'post',
+      headers: this._headers,
+      body: JSON.stringify(dataUser)
+    }).then((res) => {
+      if (res.ok) return res.json();
+      else if (res.status === 401) return Promise.reject(`Неправильная почта или пароль`);
+      return Promise.reject(`Произошла ошибка: ${res.status}`);
+    })
+  }
+
+  getUserData(token) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+        "Authorization" : `Bearer ${token}`
+      },
+    }).then(this._handleResponse)
+  }
+
+  getSavedMovies(token) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+        "Authorization" : `Bearer ${token}`
+      },
+    }).then(this._handleResponse)
+  }
 }
 
 export const mainApi = new MainApi({
   // baseUrl: "https://api.katediplom.nomoredomains.xyz",
   baseUrl: "http://localhost:3001",
   headers: {
+    'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json',
   },
 })
