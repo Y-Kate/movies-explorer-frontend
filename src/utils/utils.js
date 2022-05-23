@@ -23,12 +23,11 @@ export const getCountToLoad = () => {
   else return 5
 };
 
-export const searchMovies = (searchValue, isShortFilm, movies) => {
-  return movies.filter(m => {
-    if (isShortFilm) {
-      if (m.duration <= 40 && (m.nameRU.includes(searchValue) || m.nameEN.includes(searchValue))) return m;
-    } else {
-      if (m.nameRU.includes(searchValue) || m.nameEN.includes(searchValue)) return m;
-    }
-  })
-}
+export const searchMovies = (searchValue, movies) => (
+  movies.filter(m => m.nameRU.toLowerCase().includes(searchValue.toLowerCase()) || m.nameEN.toLowerCase().includes(searchValue.toLowerCase()))
+);
+
+export const handleIsShort = (isShort, movies) => {
+  if (isShort) return movies.filter(m => m.duration <= 40)
+  else return movies;
+};

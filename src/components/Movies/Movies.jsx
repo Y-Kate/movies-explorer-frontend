@@ -5,7 +5,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Footer from '../Footer/Footer';
 import Preloader from '../Preloader/Preloader';
-import { getCountToLoad, searchMovies } from '../../utils/utils';
+import { getCountToLoad, handleIsShort, searchMovies } from '../../utils/utils';
 import './Movies.css';
 
 function Movies({ allMovies }) {
@@ -15,15 +15,27 @@ function Movies({ allMovies }) {
   const [countIndex, setCountIndex] = useState(1);
   const [renderFilmsArray, setRenderFilmsArray] = useState([]);
   const [foundMovies, setFoundMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = () => {
     if (searchValue.length === 0) {
       setErrorText('Нужно ввести ключевое слово');
       setRenderFilmsArray([]);
     } else {
+      setIsLoading(true);
       setCountIndex(1);
       setErrorText('');
-      setFoundMovies(searchMovies(searchValue, isShortFilm, allMovies));
+
+      const foundMovies = searchMovies(searchValue, allMovies);
+      if (foundMovies.length === 0) setErrorText('Ничего не найдено');
+      setFoundMovies(foundMovies);
+
+      localStorage.setItem('moviesSearchValue', searchValue);
+      localStorage.setItem('moviesIsShortFilm', isShortFilm);
+      localStorage.setItem('moviesFoundMovies', JSON.stringify(foundMovies));
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000) 
     }
   }
 
@@ -46,20 +58,22 @@ function Movies({ allMovies }) {
           isShortFilm={isShortFilm}
           setIsShortFilm={setIsShortFilm}
         />
-        {/* <Preloader /> */}
-        <MoviesCardList>
-          {renderFilmsArray.length > 0
-            ? <>
-                <ul className="movies-list__container">
-                  {renderFilmsArray.map((film, i) => {
-                    return <MoviesCard filmData={film} key={`film-${i}`}/>
-                  })}
-                </ul>
-                {renderFilmsArray.length < foundMovies.length && <button type="button" className="movies-list__button" onClick={handleClickButton}>Ещё</button>}
-              </>
-            : errorText.length === 0 && <p className="movies-list__error">{errorText}</p>
-          }
-        </MoviesCardList>
+        {isLoading 
+          ? <Preloader />
+          : <MoviesCardList>
+              {renderFilmsArray.length > 0
+                ? <>
+                    <ul className="movies-list__container">
+                      {handleIsShort(isShortFilm, renderFilmsArray).map((film, i) => {
+                        return <MoviesCard filmData={film} key={`film-${i}`}/>
+                      })}
+                    </ul>
+                    {renderFilmsArray.length < foundMovies.length && <button type="button" className="movies-list__button" onClick={handleClickButton}>Ещё</button>}
+                  </>
+                : errorText.length !== 0 && <p className="movies-list__error">{errorText}</p>
+              }
+            </MoviesCardList>
+        }
       </div>
       <Footer/>
     </>

@@ -3,13 +3,12 @@ import './FilterCheckbox.css';
 
 function FilterCheckbox({ isShortFilm, setIsShortFilm }) {
   const handleChange = () => {
-    setIsShortFilm(!isShortFilm)
+    setIsShortFilm(!isShortFilm);
   }
 
   return (
     <div className="filter-checkbox">
         <input 
-          // required
           name="filterCheckbox"
           id="filter-checkbox"
           type="checkbox"

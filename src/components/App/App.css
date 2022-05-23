@@ -66,6 +66,13 @@
   min-height: 12px;
 }
 
+.form-user__submit-error {
+  color: #EE3465;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 12px;
+}
+
 .form-user__button {
   min-width: 260px;
   max-height: 45px;

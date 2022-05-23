@@ -18,6 +18,15 @@
   border-radius: 3px;
 }
 
+.form-user__button-register:disabled {
+  background-color: #999;
+}
+
+.form-user__button-register:disabled:hover {
+  cursor: default;
+  opacity: 1;
+}
+
 .form-user__button-register:hover {
   cursor: pointer;
   opacity: 0.85;

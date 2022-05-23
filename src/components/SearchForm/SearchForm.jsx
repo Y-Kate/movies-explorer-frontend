@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
@@ -32,7 +31,7 @@ function SearchForm({
         className="search-form__input"/>
         <button className="search-form__button" type="submit">Поиск</button>
       </div>
-      <FilterCheckbox isShortFilm={isShortFilm} setIsShortFilm={setIsShortFilm}/>
+      <FilterCheckbox isShortFilm={isShortFilm} setIsShortFilm={setIsShortFilm} />
       <hr className="search-form__underline"/>
     </form>
   );
