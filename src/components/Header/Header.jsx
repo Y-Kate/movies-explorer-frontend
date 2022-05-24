@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Header({ isMainPage }) {
-  const [bgColor, setBgColor] = useState('black')
+  const [bgColor, setBgColor] = useState('black');
+  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
     if (isMainPage) setBgColor('blue')
@@ -20,7 +22,7 @@ function Header({ isMainPage }) {
       </Link>
       
         <div className="header__container">
-          {isMainPage ? 
+          {!currentUser ? 
             <>
             <NavLink to="/signup" className="header__button">
               Регистрация
