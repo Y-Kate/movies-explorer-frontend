@@ -8,7 +8,7 @@ import Preloader from '../Preloader/Preloader';
 import { getCountToLoad, handleIsShort, searchMovies } from '../../utils/utils';
 import './Movies.css';
 
-function Movies({ allMovies }) {
+function Movies({ allMovies, isLoggedIn }) {
   const [errorText, setErrorText] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [isShortFilm, setIsShortFilm] = useState(false);
@@ -49,7 +49,7 @@ function Movies({ allMovies }) {
 
   return (
     <>
-      <Header isMainPage={false}/>
+      <Header isMainPage={false} isLoggedIn={isLoggedIn}/>
       <div className="movies">
         <SearchForm 
           handleSearch={handleSearch}

@@ -45,7 +45,7 @@ class MainApi {
       },
     }).then(this._handleResponse)
   }
-
+  
   getSavedMovies(token) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'GET',
@@ -54,6 +54,23 @@ class MainApi {
         "Authorization" : `Bearer ${token}`
       },
     }).then(this._handleResponse)
+  }
+  
+  updateProfile(user, token) {
+    return fetch(`${this._baseUrl}/users/me/`, {
+      method: 'PATCH',
+      headers: {
+        ...this._headers,
+        "Authorization" : `Bearer ${token}`
+      },
+      body: JSON.stringify(user),
+    }).then((res) => {
+      if (res.ok) return res.json()
+      else if (res.status === 409) {
+        return Promise.reject('Этот email уже используется другим пользователем');
+      }
+      return Promise.reject(`Произошла ошибка: ${res.status}`)
+    })
   }
 }
 

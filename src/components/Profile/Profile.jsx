@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../utils/formValidator';
+import { mainApi } from '../../utils/MainApi';
 import Header from '../Header/Header';
 import './Profile.css';
 
-function Profile() {
-  const [currentValues, setCurrentValues] = useState({})
+function Profile({ handleLogout }) {
+  const [currentValues, setCurrentValues] = useState({});
+  const [submitMessage, setSubmitMessage] = useState('');
+  const [isErrorSubmit, setIsErrorSubmit] = useState(false);
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid, setValues } = useFormWithValidation();
 
@@ -19,12 +21,33 @@ function Profile() {
     setCurrentValues(curValues);
   }, [currentUser, setValues])
 
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const token = localStorage.getItem('jwt')
+    mainApi.updateProfile(values, token)
+      .then((res) => {
+        setIsErrorSubmit(false);
+        setSubmitMessage('Информация успешно изменена');
+        setTimeout(() => {
+          setSubmitMessage('');
+        }, 2000)
+        setCurrentValues(res.data)
+      })
+      .catch((err) => {
+        setIsErrorSubmit(true);
+        setSubmitMessage(err);
+        setTimeout(() => {
+          setSubmitMessage('');
+        }, 2000)
+      });
+  }
+
   return (
     <>
       <Header isMainPage={false} />
       <section className="profile">
         <h2 className="profile__title">Привет, {currentUser.name}!</h2>
-        <form className="profile-form">
+        <form className="profile-form" onSubmit={handleSubmit}>
           <label className="profile__label">Имя
             <input
               name="name"
@@ -47,10 +70,9 @@ function Profile() {
             />
           </label>
           <span className="profile__error">{errors.email}</span>
+          <span className={`profile__submit-message${isErrorSubmit ? ' profile__submit-message_error' : ''}`}>{submitMessage}</span>
           <button className="profile__button" type="submit" disabled={(currentValues.name === values.name && currentValues.email === values.email) || !isValid}>Редактировать</button>
-          <Link to="/signin" className="profile__link">
-            <p className="profile__сaption">Выйти из аккаунта</p>
-          </Link>
+          <button className="profile__logout" type="button" onClick={handleLogout}>Выйти из аккаунта</button>
         </form>
       </section>
     </>

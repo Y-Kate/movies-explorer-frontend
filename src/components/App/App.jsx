@@ -56,12 +56,19 @@ function App() {
       });
   }, [isLoggedIn]);
 
+  const handleLogout = () => {
+    history.push("/");
+    localStorage.clear();
+    setIsLoggedIn(false);
+    setCurrentUser({});
+  }
+
   return (
     <CurrentUserContext.Provider value={ currentUser }>
       <div className="page">
         <Switch>
           <Route exact path="/">
-            <Main />
+            <Main isLoggedIn={isLoggedIn}/>
           </Route>
           <ProtectedRoute
             path="/movies"
@@ -80,7 +87,8 @@ function App() {
             path="/profile"
             exact
             component={Profile}
-            isLoggedIn={isLoggedIn} 
+            isLoggedIn={isLoggedIn}
+            handleLogout={handleLogout}
           />
           <Route exact path="/signin">
             <Login handleLogin={handleLogin} />

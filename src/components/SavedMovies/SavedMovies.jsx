@@ -5,14 +5,14 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import './SavedMovies.css';
 
-function SavedMovies({ isSaveMoviesPage }) {
+function SavedMovies({ isSaveMoviesPage, isLoggedIn }) {
   const [errorText, setErrorText] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [isShortFilm, setIsShortFilm] = useState(false);
 
   return (
     <>
-      <Header isMainPage={false} />
+      <Header isMainPage={false} isLoggedIn={isLoggedIn}/>
       <div className="save-movies">
         <SearchForm
           searchValue={searchValue}

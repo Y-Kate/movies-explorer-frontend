@@ -74,6 +74,19 @@
   max-width: 260px;
 }
 
+.profile__submit-message {
+  text-align: center;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: rgb(0, 119, 36);
+  margin-top: 20px;
+}
+
+.profile__submit-message_error {
+  color: #EE3465;
+}
+
 .profile__button {
   background-color: transparent;
   font-weight: 400;
@@ -100,20 +113,16 @@
   opacity: 1;
 }
 
-.profile__link {
-  text-decoration: none;
-  margin: 16px 0 40px;
-  display: flex;
-  justify-content: center;
-}
-
-.profile__сaption {
+.profile__logout {
   color: #EE3465;
   font-size: 12px;
   font-weight: 400;
   line-height: 15px;
   padding: 0;
-  margin: 0;
+  margin: 16px auto 40px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
 }
 
 
