@@ -8,7 +8,7 @@ import Preloader from '../Preloader/Preloader';
 import { getCountToLoad, handleIsShort, searchMovies } from '../../utils/utils';
 import './Movies.css';
 
-function Movies({ allMovies, isLoggedIn }) {
+function Movies({ allMovies, isLoggedIn, handleLike, handleDislike }) {
   const [errorText, setErrorText] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [isShortFilm, setIsShortFilm] = useState(false);
@@ -65,7 +65,12 @@ function Movies({ allMovies, isLoggedIn }) {
                 ? <>
                     <ul className="movies-list__container">
                       {handleIsShort(isShortFilm, renderFilmsArray).map((film, i) => {
-                        return <MoviesCard filmData={film} key={`film-${i}`}/>
+                        return <MoviesCard 
+                          filmData={film}
+                          key={`film-${i}`}
+                          handleLike={handleLike}
+                          handleDislike={handleDislike}
+                        />
                       })}
                     </ul>
                     {renderFilmsArray.length < foundMovies.length && <button type="button" className="movies-list__button" onClick={handleClickButton}>Ещё</button>}

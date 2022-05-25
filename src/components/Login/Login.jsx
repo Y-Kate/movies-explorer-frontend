@@ -4,7 +4,7 @@ import logo from '../../images/logo.svg';
 import { useFormWithValidation } from '../../utils/formValidator';
 import './Login.css';
 
-function Login({ handleLogin }) {
+function Login({ handleLogin, loginErrorMessage }) {
   const { values, handleChange, errors, isValid, initRequiredFields } = useFormWithValidation();
 
   useEffect(() => {
@@ -52,6 +52,7 @@ function Login({ handleLogin }) {
           onChange={handleChange}
         />
         <span className="form-user__error">{errors.password}</span>
+        <span className="form-user__submit-error">{loginErrorMessage}</span>
 
         <button className="form-user__button" type="submit" disabled={!isValid}>Войти</button>
         <p className="form-user__сaption"> Еще не зарегистрированы? <a href="/signup" className="form-user__alredy">Регистрация</a>

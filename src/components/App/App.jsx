@@ -18,6 +18,9 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); 
   const [currentUser, setCurrentUser] = useState({});
   const [allMovies, setAllMovies] = useState([]); 
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [loginErrorMessage, setLoginErrorMessage] = useState('');
+
   const history = useHistory();
 
   function handleLogin(data) {
@@ -29,7 +32,7 @@ function App() {
         history.push('/movies');
       })
       .catch((err) => {
-        console.log('err', err.message);
+        setLoginErrorMessage(err);
       });
   }
 
@@ -45,23 +48,54 @@ function App() {
   }, []);
   
   useEffect(() => {
-    const token = localStorage.getItem('jwt')
-    Promise.all([mainApi.getUserData(token), mainApi.getSavedMovies(token)])
-      .then(([user, userMovies]) => {
-        // TODO userMovies
-        setCurrentUser(user.data);
-      })
-      .catch((err) => {
-        console.log(`Произошла ошибка ${err}`);
-      });
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      Promise.all([mainApi.getUserData(token), mainApi.getSavedMovies(token)])
+        .then(([user, userMovies]) => {
+          setCurrentUser(user.data);
+          setSavedMovies(userMovies.data);
+        })
+        .catch((err) => {
+          console.log(`Произошла ошибка ${err}`);
+        });
+    }
   }, [isLoggedIn]);
-
+  
   const handleLogout = () => {
-    history.push("/");
     localStorage.clear();
     setIsLoggedIn(false);
     setCurrentUser({});
+    history.push("/");
   }
+
+  const handleLike = (filmData) => {
+    const token = localStorage.getItem('jwt');
+    delete filmData.isLiked;
+    mainApi.postMovies(filmData, token)
+      .then((res) => {
+        console.log('res', res);
+        setSavedMovies([
+          ...savedMovies,
+          res.data
+        ]);
+      })
+      .catch((err) => {
+        console.log('err', err);
+      })
+  };
+  
+  const handleDislike = (filmData) => {
+
+  };
+
+  useEffect(() => {
+    const allMoviesWithLikes = allMovies.map(m => {
+      const isSaved = savedMovies.some(savedMovie => savedMovie.movieId === m.movieId);
+      isSaved ? m.isLiked = true : m.isLiked = false;
+      return m
+    });
+    setAllMovies(allMoviesWithLikes);
+  }, [savedMovies]);
 
   return (
     <CurrentUserContext.Provider value={ currentUser }>
@@ -76,12 +110,18 @@ function App() {
             component={Movies}
             isLoggedIn={isLoggedIn}
             allMovies={allMovies}
+            handleLike={handleLike}
+            handleDislike={handleDislike}
+
           />
           <ProtectedRoute
             path="/saved-movies"
             exact
             component={SavedMovies}
-            isLoggedIn={isLoggedIn} 
+            isLoggedIn={isLoggedIn}
+            savedMovies={savedMovies}
+            setSavedMovies={setSavedMovies}
+            handleDislike={handleDislike}
           />
           <ProtectedRoute
             path="/profile"
@@ -91,7 +131,7 @@ function App() {
             handleLogout={handleLogout}
           />
           <Route exact path="/signin">
-            <Login handleLogin={handleLogin} />
+            <Login handleLogin={handleLogin} loginErrorMessage={loginErrorMessage}/>
           </Route>
           <Route exact path="/signup">
             <Register handleLogin={handleLogin}/>

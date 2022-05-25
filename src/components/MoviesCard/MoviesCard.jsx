@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import './MoviesCard.css';
 
-function MoviesCard({ filmData }) {
+function MoviesCard({ filmData, handleLike, handleDislike }) {
   const { pathname } = useLocation();
   
   const getTime = (duration) => {
@@ -10,7 +10,7 @@ function MoviesCard({ filmData }) {
     const minutes = duration % 60;
     return hours + 'ч ' + minutes + 'м';
   };
-  
+ 
   return (
     <li className="movies-card">
       <a href={filmData.trailerLink} target="_blank" rel="noreferrer" className="movies-card__link">
@@ -19,8 +19,18 @@ function MoviesCard({ filmData }) {
       <div className="movies-card__description">
         <p className="movies-card__title">{filmData.nameRU}</p>
         {pathname === "/movies"
-          ? <button type="button" className={`movies-card__like movies-card__like${filmData.isLiked ? '_active' : '_save'}`} aria-label="Нравится" ></button>
-          : <button type="button" className="movies-card__like movies-card__like_close" aria-label="Нравится" ></button>
+          ? <button 
+              type="button" 
+              className={`movies-card__like movies-card__like${filmData.isLiked ? '_active' : '_save'}`}
+              aria-label="Нравится"
+              onClick={filmData.isLiked ? () => handleDislike(filmData) : () => handleLike(filmData)}
+            />
+          : <button 
+            type="button" 
+            className="movies-card__like movies-card__like_close"
+            aria-label="Не нравится"
+            onClick={() => handleDislike(filmData)}
+          />
         }
       </div>
       <hr className="movies-card__underline"/>

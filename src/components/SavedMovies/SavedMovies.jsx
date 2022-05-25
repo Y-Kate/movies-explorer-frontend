@@ -4,8 +4,9 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import './SavedMovies.css';
+import MoviesCard from '../MoviesCard/MoviesCard';
 
-function SavedMovies({ isSaveMoviesPage, isLoggedIn }) {
+function SavedMovies({ isLoggedIn, savedMovies, setSavedMovies, handleDislike }) {
   const [errorText, setErrorText] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [isShortFilm, setIsShortFilm] = useState(false);
@@ -23,9 +24,9 @@ function SavedMovies({ isSaveMoviesPage, isLoggedIn }) {
         <MoviesCardList>
           {errorText.length === 0 ?
             <ul className="movies-list__container">
-              {/* {renderFilmsArray.map((film, i) => {
-                return <MoviesCard filmData={film} isSaveMoviesPage={isSaveMoviesPage} key={`film-${i}`}/>
-              })} */}
+              {savedMovies.map((film, i) => {
+                return <MoviesCard filmData={film} isSaveMoviesPage={true} key={`film-${i}`} handleDislike={handleDislike}/>
+              })}
             </ul>
           : <p className="movies-list__error">{errorText}</p>
         }

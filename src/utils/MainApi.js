@@ -72,6 +72,17 @@ class MainApi {
       return Promise.reject(`Произошла ошибка: ${res.status}`)
     })
   }
+
+  postMovies(movie, token) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: 'POST',
+      headers: {
+        ...this._headers,
+        "Authorization" : `Bearer ${token}`
+      },
+      body: JSON.stringify(movie),
+    }).then(this._handleResponse)
+  }
 }
 
 export const mainApi = new MainApi({
