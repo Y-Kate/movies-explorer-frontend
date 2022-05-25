@@ -83,6 +83,16 @@ class MainApi {
       body: JSON.stringify(movie),
     }).then(this._handleResponse)
   }
+
+  deleteMovie(movieId, token) {
+    return fetch(`${this._baseUrl}/movies/${movieId}`, {
+      method: 'DELETE',
+      headers: {
+        ...this._headers,
+        "Authorization" : `Bearer ${token}`
+      },
+    }).then(this._handleResponse)
+  }
 }
 
 export const mainApi = new MainApi({

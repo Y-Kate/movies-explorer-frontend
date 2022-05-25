@@ -53,6 +53,7 @@ function App() {
       Promise.all([mainApi.getUserData(token), mainApi.getSavedMovies(token)])
         .then(([user, userMovies]) => {
           setCurrentUser(user.data);
+          const userFilms = userMovies.data.filter(m => m.owner === user.data._id)
           setSavedMovies(userMovies.data);
         })
         .catch((err) => {
@@ -71,6 +72,7 @@ function App() {
   const handleLike = (filmData) => {
     const token = localStorage.getItem('jwt');
     delete filmData.isLiked;
+    delete filmData._id;
     mainApi.postMovies(filmData, token)
       .then((res) => {
         console.log('res', res);
@@ -85,13 +87,28 @@ function App() {
   };
   
   const handleDislike = (filmData) => {
-
+    const token = localStorage.getItem('jwt');
+    const id = filmData._id;
+    mainApi.deleteMovie(id, token)
+      .then((res) => {
+        const newSavedMovies = savedMovies.filter(m => m._id !== filmData._id);
+        setSavedMovies(newSavedMovies);
+      })
+      .catch((err) => {
+        console.log('err', err);
+      })
   };
 
   useEffect(() => {
     const allMoviesWithLikes = allMovies.map(m => {
       const isSaved = savedMovies.some(savedMovie => savedMovie.movieId === m.movieId);
-      isSaved ? m.isLiked = true : m.isLiked = false;
+      if (isSaved) { 
+        m.isLiked = true
+        m._id = savedMovies.find(movie => movie.movieId === m.movieId)._id;
+      } else {
+        m.isLiked = false;
+        m._id = '';
+      } 
       return m
     });
     setAllMovies(allMoviesWithLikes);
