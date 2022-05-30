@@ -34,7 +34,7 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike, serverErrorM
 
       localStorage.setItem('moviesSearchValue', searchValue);
       localStorage.setItem('moviesIsShortFilm', isShort);
-      localStorage.setItem('moviesFoundMovies', JSON.stringify(foundMovies));
+      localStorage.setItem('moviesFoundMovies', JSON.stringify(renderFilms));
       setTimeout(() => {
         setIsLoading(false);
       }, 1000) 
@@ -56,6 +56,15 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike, serverErrorM
   useEffect(() => {
     setErrorText(serverErrorMessage)
   }, [serverErrorMessage])
+
+  useEffect(() => {
+    const moviesSearchValue = localStorage.getItem('moviesSearchValue');
+    setSearchValue(moviesSearchValue);
+    const moviesIsShortFilm = localStorage.getItem('moviesIsShortFilm');
+    setIsShortFilm(moviesIsShortFilm);
+    const moviesFoundMovies = localStorage.getItem('moviesFoundMovies');
+    setFoundMovies(JSON.parse(moviesFoundMovies));
+  }, [])
 
   return (
     <>
