@@ -26,12 +26,38 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike }) {
       setCountIndex(1);
       setErrorText('');
 
-      const foundMovies = searchMovies(searchValue, allMovies);
-      if (foundMovies.length === 0) setErrorText('Ничего не найдено');
-      setFoundMovies(foundMovies);
+      let renderFilms = allMovies;
+      renderFilms = searchMovies(searchValue, renderFilms);
+      renderFilms = handleIsShort(isShortFilm, renderFilms);
+      if (renderFilms.length === 0) setErrorText('Ничего не найдено');
+      setFoundMovies(renderFilms);
 
       localStorage.setItem('moviesSearchValue', searchValue);
       localStorage.setItem('moviesIsShortFilm', isShortFilm);
+      localStorage.setItem('moviesFoundMovies', JSON.stringify(foundMovies));
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000) 
+    }
+  }
+
+  const handleChangeIsShort = (isShort) => {
+    if (searchValue.length === 0) {
+      setErrorText('Нужно ввести ключевое слово');
+      setRenderFilmsArray([]);
+    } else {
+      setIsLoading(true);
+      setCountIndex(1);
+      setErrorText('');
+
+      let renderFilms = allMovies;
+      renderFilms = searchMovies(searchValue, renderFilms);
+      renderFilms = handleIsShort(isShort, renderFilms);
+      if (renderFilms.length === 0) setErrorText('Ничего не найдено');
+      setFoundMovies(renderFilms);
+
+      localStorage.setItem('moviesSearchValue', searchValue);
+      localStorage.setItem('moviesIsShortFilm', isShort);
       localStorage.setItem('moviesFoundMovies', JSON.stringify(foundMovies));
       setTimeout(() => {
         setIsLoading(false);
@@ -53,6 +79,7 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike }) {
       <div className="movies">
         <SearchForm 
           handleSearch={handleSearch}
+          handleChangeIsShort={handleChangeIsShort}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
           isShortFilm={isShortFilm}
@@ -64,7 +91,7 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike }) {
               {renderFilmsArray.length > 0
                 ? <>
                     <ul className="movies-list__container">
-                      {handleIsShort(isShortFilm, renderFilmsArray).map((film, i) => {
+                      {renderFilmsArray.map((film, i) => {
                         return <MoviesCard 
                           filmData={film}
                           key={`film-${i}`}
