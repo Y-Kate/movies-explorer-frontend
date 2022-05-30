@@ -21,6 +21,7 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike, serverErrorM
     if (searchValue.length === 0) {
       setErrorText('Нужно ввести ключевое слово');
       setRenderFilmsArray([]);
+      localStorage.setItem('moviesFoundMovies', JSON.stringify([]));
     } else {
       setIsLoading(true);
       setCountIndex(1);
@@ -46,7 +47,9 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike, serverErrorM
   }
 
   useEffect(() => {
-    setRenderFilmsArray(foundMovies.slice(0, getCountToLoad() * countIndex));
+    const renderFilms = foundMovies.slice(0, getCountToLoad() * countIndex)
+    setRenderFilmsArray(renderFilms);
+    localStorage.setItem('moviesFoundMovies', JSON.stringify(renderFilms));
   }, [countIndex, foundMovies]);
 
   const handleClickButton = () => {
