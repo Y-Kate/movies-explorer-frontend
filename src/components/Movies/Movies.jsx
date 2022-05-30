@@ -8,7 +8,7 @@ import Preloader from '../Preloader/Preloader';
 import { getCountToLoad, handleIsShort, searchMovies } from '../../utils/utils';
 import './Movies.css';
 
-function Movies({ allMovies, isLoggedIn, handleLike, handleDislike }) {
+function Movies({ allMovies, isLoggedIn, handleLike, handleDislike, serverErrorMessage }) {
   const [errorText, setErrorText] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [isShortFilm, setIsShortFilm] = useState(false);
@@ -17,31 +17,7 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike }) {
   const [foundMovies, setFoundMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSearch = () => {
-    if (searchValue.length === 0) {
-      setErrorText('Нужно ввести ключевое слово');
-      setRenderFilmsArray([]);
-    } else {
-      setIsLoading(true);
-      setCountIndex(1);
-      setErrorText('');
-
-      let renderFilms = allMovies;
-      renderFilms = searchMovies(searchValue, renderFilms);
-      renderFilms = handleIsShort(isShortFilm, renderFilms);
-      if (renderFilms.length === 0) setErrorText('Ничего не найдено');
-      setFoundMovies(renderFilms);
-
-      localStorage.setItem('moviesSearchValue', searchValue);
-      localStorage.setItem('moviesIsShortFilm', isShortFilm);
-      localStorage.setItem('moviesFoundMovies', JSON.stringify(foundMovies));
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000) 
-    }
-  }
-
-  const handleChangeIsShort = (isShort) => {
+  const handleSearch = (isShort) => {
     if (searchValue.length === 0) {
       setErrorText('Нужно ввести ключевое слово');
       setRenderFilmsArray([]);
@@ -65,6 +41,10 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike }) {
     }
   }
 
+  const handleChangeIsShort = (isShort) => {
+    handleSearch(isShort);
+  }
+
   useEffect(() => {
     setRenderFilmsArray(foundMovies.slice(0, getCountToLoad() * countIndex));
   }, [countIndex, foundMovies]);
@@ -72,6 +52,10 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike }) {
   const handleClickButton = () => {
     setCountIndex(countIndex + 1);
   };
+
+  useEffect(() => {
+    setErrorText(serverErrorMessage)
+  }, [serverErrorMessage])
 
   return (
     <>

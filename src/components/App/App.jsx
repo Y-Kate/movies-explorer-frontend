@@ -13,6 +13,7 @@ import { moviesApi } from '../../utils/MoviesApi';
 import { getConvertedMovies } from '../../utils/utils';
 import './App.css';
 import { mainApi } from '../../utils/MainApi';
+import { serverErrorText } from '../../utils/constants';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); 
@@ -20,14 +21,17 @@ function App() {
   const [allMovies, setAllMovies] = useState([]); 
   const [savedMovies, setSavedMovies] = useState([]);
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
+  const [serverErrorMessage, setServerErrorMessage] = useState('');
 
   const history = useHistory();
 
   function handleLogin(data) {
+    setLoginErrorMessage('');
     mainApi
       .login(data)
       .then((data) => {
         setIsLoggedIn(true);
+        getMainUserData();
         localStorage.setItem('jwt', data.token);
         history.push('/movies');
       })
@@ -38,16 +42,18 @@ function App() {
 
   // Получает все фильмы со стороннего api
   useEffect(() => {
+    setServerErrorMessage('');
     moviesApi.getMovies()
       .then((moviesArr) => {
         setAllMovies(getConvertedMovies(moviesArr))
       })
       .catch((err) => {
-        console.log(`Произошла ошибка при загрузке фильмов - ${err}`)
+        setServerErrorMessage(serverErrorText);
       });
   }, []);
   
-  useEffect(() => {
+  const getMainUserData = () => {
+    setServerErrorMessage('');
     const token = localStorage.getItem('jwt');
     if (token) {
       Promise.all([mainApi.getUserData(token), mainApi.getSavedMovies(token)])
@@ -55,12 +61,13 @@ function App() {
           setCurrentUser(user.data);
           const userFilms = userMovies.data.filter(m => m.owner === user.data._id)
           setSavedMovies(userFilms);
+          setAllMoviesWithData(userFilms)
         })
         .catch((err) => {
-          console.log(`Произошла ошибка ${err}`);
+          setServerErrorMessage(serverErrorText);
         });
     }
-  }, [isLoggedIn]);
+  };
   
   const handleLogout = () => {
     localStorage.clear();
@@ -75,10 +82,12 @@ function App() {
     delete filmData._id;
     mainApi.postMovies(filmData, token)
       .then((res) => {
-        setSavedMovies([
+        const newSavedMovies = [
           ...savedMovies,
           res.data
-        ]);
+        ];
+        setSavedMovies(newSavedMovies);
+        setAllMoviesWithData(newSavedMovies)
       })
       .catch((err) => {
         console.log('err', err);
@@ -92,18 +101,19 @@ function App() {
       .then((res) => {
         const newSavedMovies = savedMovies.filter(m => m._id !== filmData._id);
         setSavedMovies(newSavedMovies);
+        setAllMoviesWithData(newSavedMovies)
       })
       .catch((err) => {
         console.log('err', err);
       })
   };
 
-  useEffect(() => {
+  const setAllMoviesWithData = (newSavedMovies) => {
     const allMoviesWithLikes = allMovies.map(m => {
-      const isSaved = savedMovies.some(savedMovie => savedMovie.movieId === m.movieId);
+      const isSaved = newSavedMovies.some(savedMovie => savedMovie.movieId === m.movieId);
       if (isSaved) { 
         m.isLiked = true
-        m._id = savedMovies.find(movie => movie.movieId === m.movieId)._id;
+        m._id = newSavedMovies.find(movie => movie.movieId === m.movieId)._id;
       } else {
         m.isLiked = false;
         m._id = '';
@@ -111,7 +121,7 @@ function App() {
       return m
     });
     setAllMovies(allMoviesWithLikes);
-  }, [savedMovies]);
+  };
 
   return (
     <CurrentUserContext.Provider value={ currentUser }>
@@ -128,7 +138,7 @@ function App() {
             allMovies={allMovies}
             handleLike={handleLike}
             handleDislike={handleDislike}
-
+            serverErrorMessage={serverErrorMessage}
           />
           <ProtectedRoute
             path="/saved-movies"
@@ -136,8 +146,8 @@ function App() {
             component={SavedMovies}
             isLoggedIn={isLoggedIn}
             savedMovies={savedMovies}
-            setSavedMovies={setSavedMovies}
             handleDislike={handleDislike}
+            serverErrorMessage={serverErrorMessage}
           />
           <ProtectedRoute
             path="/profile"

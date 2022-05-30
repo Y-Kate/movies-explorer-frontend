@@ -3,8 +3,8 @@ import './FilterCheckbox.css';
 
 function FilterCheckbox({ isShortFilm, setIsShortFilm, handleChangeIsShort }) {
   const handleChange = () => {
-    setIsShortFilm(!isShortFilm);
     handleChangeIsShort(!isShortFilm);
+    setIsShortFilm(!isShortFilm);
   }
 
   return (

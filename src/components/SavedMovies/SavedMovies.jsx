@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
@@ -7,29 +7,41 @@ import './SavedMovies.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { handleIsShort, searchMovies } from '../../utils/utils';
 
-function SavedMovies({ isLoggedIn, savedMovies, setSavedMovies, handleDislike }) {
+function SavedMovies({ isLoggedIn, savedMovies, handleDislike, serverErrorMessage }) {
   const [errorText, setErrorText] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [isShortFilm, setIsShortFilm] = useState(false);
   const [renderMovies, setRenderMovies] = useState([]);
 
-  const handleSearch = () => {
-    let renderFilms = savedMovies;
-    if (searchValue.length > 0) {
-      renderFilms = searchMovies(searchValue, renderFilms);
-    } 
-    renderFilms = handleIsShort(isShortFilm, renderFilms);
-    setRenderMovies(renderFilms);
-  }
-
-  const handleChangeIsShort = (isShort) => {
+  const handleSearch = (isShort) => {
+    setErrorText("")
     let renderFilms = savedMovies;
     if (searchValue.length > 0) {
       renderFilms = searchMovies(searchValue, renderFilms);
     } 
     renderFilms = handleIsShort(isShort, renderFilms);
-    setRenderMovies(renderFilms);
+    if (renderFilms.length === 0) {
+      setErrorText("Фильмы не найдены");
+    } else {
+      setRenderMovies(renderFilms);
+    }
   }
+
+  const handleChangeIsShort = (isShort) => {
+    handleSearch(isShort);
+  }
+
+  useEffect(() => {
+    if (savedMovies.length === 0) {
+      setErrorText("Нет сохраненных фильмов")
+    } else {
+      setRenderMovies(savedMovies);
+    }
+  }, [savedMovies])
+
+  useEffect(() => {
+    setErrorText(serverErrorMessage)
+  }, [serverErrorMessage])
 
   return (
     <>

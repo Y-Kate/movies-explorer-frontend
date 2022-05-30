@@ -12,7 +12,7 @@ function SearchForm({
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleSearch();
+    handleSearch(isShortFilm);
   }
 
   const handleChangeSearchValue = (evt) => {
