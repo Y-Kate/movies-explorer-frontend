@@ -3,6 +3,7 @@ import './SearchForm.css';
 
 function SearchForm({ 
   handleSearch,
+  handleChangeIsShort,
   searchValue,
   setSearchValue,
   isShortFilm,
@@ -31,7 +32,7 @@ function SearchForm({
         className="search-form__input"/>
         <button className="search-form__button" type="submit">Поиск</button>
       </div>
-      <FilterCheckbox isShortFilm={isShortFilm} setIsShortFilm={setIsShortFilm} />
+      <FilterCheckbox isShortFilm={isShortFilm} setIsShortFilm={setIsShortFilm} handleChangeIsShort={handleChangeIsShort} />
       <hr className="search-form__underline"/>
     </form>
   );

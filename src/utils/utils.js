@@ -31,8 +31,3 @@ export const handleIsShort = (isShort, movies) => {
   if (isShort) return movies.filter(m => m.duration <= 40)
   else return movies;
 };
-
-export const isLikedMovie = (movies, savedMovies) => {
-  // if (isShort) return movies.filter(m => m.duration <= 40)
-  // else return movies;
-};

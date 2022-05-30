@@ -54,7 +54,7 @@ function App() {
         .then(([user, userMovies]) => {
           setCurrentUser(user.data);
           const userFilms = userMovies.data.filter(m => m.owner === user.data._id)
-          setSavedMovies(userMovies.data);
+          setSavedMovies(userFilms);
         })
         .catch((err) => {
           console.log(`Произошла ошибка ${err}`);
@@ -75,7 +75,6 @@ function App() {
     delete filmData._id;
     mainApi.postMovies(filmData, token)
       .then((res) => {
-        console.log('res', res);
         setSavedMovies([
           ...savedMovies,
           res.data
