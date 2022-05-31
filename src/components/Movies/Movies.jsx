@@ -27,15 +27,15 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike, serverErrorM
       setCountIndex(1);
       setErrorText('');
 
-      let renderFilms = allMovies;
-      renderFilms = searchMovies(searchValue, renderFilms);
-      renderFilms = handleIsShort(isShort, renderFilms);
-      if (renderFilms.length === 0) setErrorText('Ничего не найдено');
-      setFoundMovies(renderFilms);
+      let foundFilms = allMovies;
+      foundFilms = searchMovies(searchValue, foundFilms);
+      foundFilms = handleIsShort(isShort, foundFilms);
+      if (foundFilms.length === 0) setErrorText('Ничего не найдено');
+      setFoundMovies(foundFilms);
 
       localStorage.setItem('moviesSearchValue', searchValue);
       localStorage.setItem('moviesIsShortFilm', isShort);
-      localStorage.setItem('moviesFoundMovies', JSON.stringify(renderFilms));
+      localStorage.setItem('moviesFoundMovies', JSON.stringify(foundFilms));
       setTimeout(() => {
         setIsLoading(false);
       }, 1000) 
@@ -47,9 +47,8 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike, serverErrorM
   }
 
   useEffect(() => {
-    const renderFilms = foundMovies.slice(0, getCountToLoad() * countIndex)
+    const renderFilms = foundMovies.slice(0, getCountToLoad() * countIndex);
     setRenderFilmsArray(renderFilms);
-    localStorage.setItem('moviesFoundMovies', JSON.stringify(renderFilms));
   }, [countIndex, foundMovies]);
 
   const handleClickButton = () => {
@@ -59,15 +58,30 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike, serverErrorM
   useEffect(() => {
     setErrorText(serverErrorMessage)
   }, [serverErrorMessage])
-
+  
   useEffect(() => {
     const moviesSearchValue = localStorage.getItem('moviesSearchValue');
-    setSearchValue(moviesSearchValue);
+    if (moviesSearchValue) setSearchValue(moviesSearchValue);
+    else setSearchValue('');
+    
     const moviesIsShortFilm = localStorage.getItem('moviesIsShortFilm');
-    setIsShortFilm(moviesIsShortFilm);
+    if (moviesIsShortFilm === 'true') setIsShortFilm(true);
+    else setIsShortFilm(false);
+    
     const moviesFoundMovies = localStorage.getItem('moviesFoundMovies');
-    setFoundMovies(JSON.parse(moviesFoundMovies));
+    if (moviesFoundMovies) setFoundMovies(JSON.parse(moviesFoundMovies));
+    else setFoundMovies([]);
   }, [])
+  
+  useEffect(() => {
+    const moviesFoundMovies = localStorage.getItem('moviesFoundMovies');
+    if (moviesFoundMovies) {
+      const updatedFoundMovies = JSON.parse(moviesFoundMovies).map(movie => allMovies.find(updateMovie => updateMovie.movieId === movie.movieId));
+      setFoundMovies(updatedFoundMovies);
+    }
+  }, [allMovies])
+  
+  
 
   return (
     <>
