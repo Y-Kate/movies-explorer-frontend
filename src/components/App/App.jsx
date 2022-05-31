@@ -1,4 +1,4 @@
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
@@ -30,10 +30,8 @@ function App() {
     mainApi
       .login(data)
       .then((data) => {
-        setIsLoggedIn(true);
-        getMainUserData();
+        getMainUserData(data.token);
         localStorage.setItem('jwt', data.token);
-        history.push('/movies');
       })
       .catch((err) => {
         setLoginErrorMessage(err);
@@ -52,21 +50,20 @@ function App() {
       });
   }, []);
   
-  const getMainUserData = () => {
+  const getMainUserData = (token) => {
     setServerErrorMessage('');
-    const token = localStorage.getItem('jwt');
-    if (token) {
-      Promise.all([mainApi.getUserData(token), mainApi.getSavedMovies(token)])
-        .then(([user, userMovies]) => {
-          setCurrentUser(user.data);
-          const userFilms = userMovies.data.filter(m => m.owner === user.data._id)
-          setSavedMovies(userFilms);
-          setAllMoviesWithData(userFilms)
-        })
-        .catch((err) => {
-          setServerErrorMessage(serverErrorText);
-        });
-    }
+    Promise.all([mainApi.getUserData(token), mainApi.getSavedMovies(token)])
+    .then(([user, userMovies]) => {
+        setIsLoggedIn(true);
+        setCurrentUser(user.data);
+        const userFilms = userMovies.data.filter(m => m.owner === user.data._id)
+        setSavedMovies(userFilms);
+        setAllMoviesWithData(userFilms)
+        history.push('/movies');
+      })
+      .catch((err) => {
+        setServerErrorMessage(serverErrorText);
+      });
   };
   
   const handleLogout = () => {
@@ -75,7 +72,16 @@ function App() {
     setCurrentUser({});
     history.push("/");
   }
-
+  
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      getMainUserData(token);
+    } else {
+      handleLogout();
+    }
+  }, [])
+  
   const handleLike = (filmData) => {
     const token = localStorage.getItem('jwt');
     delete filmData.isLiked;
