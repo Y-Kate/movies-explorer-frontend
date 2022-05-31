@@ -75,13 +75,12 @@ function Movies({ allMovies, isLoggedIn, handleLike, handleDislike, serverErrorM
   
   useEffect(() => {
     const moviesFoundMovies = localStorage.getItem('moviesFoundMovies');
-    if (moviesFoundMovies) {
+    if (moviesFoundMovies && allMovies.length > 0) {
       const updatedFoundMovies = JSON.parse(moviesFoundMovies).map(movie => allMovies.find(updateMovie => updateMovie.movieId === movie.movieId));
       setFoundMovies(updatedFoundMovies);
+      localStorage.setItem('moviesFoundMovies', JSON.stringify(updatedFoundMovies));
     }
   }, [allMovies])
-  
-  
 
   return (
     <>
