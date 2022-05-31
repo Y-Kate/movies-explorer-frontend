@@ -96,8 +96,8 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-  // baseUrl: "https://api.katediplom.nomoredomains.xyz",
-  baseUrl: "http://localhost:3001",
+  baseUrl: "https://api.katediplom.nomoredomains.xyz",
+  // baseUrl: "http://localhost:3001",
   headers: {
     'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json',
