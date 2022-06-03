@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import { useFormWithValidation } from '../../utils/formValidator';
 import './Login.css';
 
-function Login({ handleLogin, loginErrorMessage }) {
+function Login({ handleLogin, loginErrorMessage, isLoggedIn }) {
   const { values, handleChange, errors, isValid, initRequiredFields } = useFormWithValidation();
+  const history = useHistory();
 
   useEffect(() => {
     initRequiredFields({
@@ -18,6 +20,10 @@ function Login({ handleLogin, loginErrorMessage }) {
     evt.preventDefault();
     handleLogin(values);
   }
+
+  useEffect(() => {
+    if (isLoggedIn) history.push('/')
+  }, [isLoggedIn])
 
   return (
     <section className="login">

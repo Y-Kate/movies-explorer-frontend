@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import { useFormWithValidation } from '../../utils/formValidator';
 import { mainApi } from '../../utils/MainApi';
 import './Register.css';
 
-function Register({ handleLogin }) {
+function Register({ handleLogin, isLoggedIn }) {
   const { values, handleChange, errors, isValid, initRequiredFields } = useFormWithValidation();
   const [errorSubmit, setErrorSubmit] = useState('')
+  const history = useHistory();
 
   useEffect(() => {
     initRequiredFields({
@@ -29,6 +31,10 @@ function Register({ handleLogin }) {
         setErrorSubmit(err);
       })
   }
+
+  useEffect(() => {
+    if (isLoggedIn) history.push('/')
+  }, [isLoggedIn])
 
   return (
     <section className="register">

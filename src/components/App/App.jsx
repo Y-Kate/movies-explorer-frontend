@@ -16,7 +16,7 @@ import { mainApi } from '../../utils/MainApi';
 import { serverErrorText } from '../../utils/constants';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [isLoggedIn, setIsLoggedIn] = useState(true); 
   const [currentUser, setCurrentUser] = useState({});
   const [allMovies, setAllMovies] = useState([]); 
   const [savedMovies, setSavedMovies] = useState([]);
@@ -30,8 +30,10 @@ function App() {
     mainApi
       .login(data)
       .then((data) => {
+        setIsLoggedIn(true);
         getMainUserData(data.token);
         localStorage.setItem('jwt', data.token);
+        history.push('/movies');
       })
       .catch((err) => {
         setLoginErrorMessage(err);
@@ -54,14 +56,14 @@ function App() {
     setServerErrorMessage('');
     Promise.all([mainApi.getUserData(token), mainApi.getSavedMovies(token)])
     .then(([user, userMovies]) => {
-        setIsLoggedIn(true);
+        if (!isLoggedIn) setIsLoggedIn(true);
         setCurrentUser(user.data);
         const userFilms = userMovies.data.filter(m => m.owner === user.data._id)
         setSavedMovies(userFilms);
         setAllMoviesWithData(userFilms)
-        history.push('/movies');
       })
       .catch((err) => {
+        setIsLoggedIn(false);
         setServerErrorMessage(serverErrorText);
       });
   };
@@ -78,6 +80,7 @@ function App() {
     if (token) {
       getMainUserData(token);
     } else {
+      setIsLoggedIn(false);
       handleLogout();
     }
   }, [])
@@ -163,10 +166,10 @@ function App() {
             handleLogout={handleLogout}
           />
           <Route exact path="/signin">
-            <Login handleLogin={handleLogin} loginErrorMessage={loginErrorMessage}/>
+            <Login handleLogin={handleLogin} loginErrorMessage={loginErrorMessage} isLoggedIn={isLoggedIn}/>
           </Route>
           <Route exact path="/signup">
-            <Register handleLogin={handleLogin}/>
+            <Register handleLogin={handleLogin} isLoggedIn={isLoggedIn}/>
           </Route>
           <Route path="*" component={NotFoundPage} />
         </Switch>
