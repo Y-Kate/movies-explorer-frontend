@@ -81,7 +81,7 @@ function Register({ handleLogin }) {
         <span className="form-user__submit-error">{errorSubmit}</span>
         
         <button className="form-user__button-register" type="submit" disabled={!isValid}>Зарегистрироваться</button>
-        <p className="form-user__сaption"> Уже зарегистрированы? <a href="/signin" className="form-user__alredy">Войти</a>
+        <p className="form-user__сaption"> Уже зарегистрированы? <Link to="/signin" className="form-user__alredy">Войти</Link>
         </p>
       </form>
     </section>

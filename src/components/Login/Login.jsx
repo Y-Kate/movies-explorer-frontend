@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import { useFormWithValidation } from '../../utils/formValidator';
@@ -55,7 +55,7 @@ function Login({ handleLogin, loginErrorMessage }) {
         <span className="form-user__submit-error">{loginErrorMessage}</span>
 
         <button className="form-user__button" type="submit" disabled={!isValid}>Войти</button>
-        <p className="form-user__сaption"> Еще не зарегистрированы? <a href="/signup" className="form-user__alredy">Регистрация</a>
+        <p className="form-user__сaption"> Еще не зарегистрированы? <Link to="/signup" className="form-user__alredy">Регистрация</Link>
         </p>
       </form>
     </section>
