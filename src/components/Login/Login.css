@@ -1,0 +1,12 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+}
+
+@media (min-width: 660px) {
+  .login {
+    margin: 0 auto;
+    max-width: 396px;
+  }
+}

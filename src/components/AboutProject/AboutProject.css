@@ -1,0 +1,116 @@
+.about-project {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 70px 18px 70px;
+}
+
+.about-project__article {
+  margin: 60px 0 0;
+}
+
+.about-project__title {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.about-project__description {
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 400;
+  padding: 16px 0 56px;
+  margin: 0;
+}
+
+.about-project__timeframe {
+  display: grid;
+  grid-template-columns: 100px auto;
+  grid-template-rows: repeat(2, 35px);
+  text-align: center;
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+.about-project__timeframe-weeks {
+  background-color: #303030;
+  margin: 0;
+  padding: 11px 0;
+}
+
+.about-project__timeframe-weeks:first-child {
+  background-color: #3DDC84;
+  color: #000;
+}
+
+.about-project__timeframe-theme {
+  color: #A0A0A0;
+  margin: 0;
+  padding-top: 10px;
+}
+
+@media (min-width: 620px) {
+  .about-project {
+    padding: 90px 50px 85px;
+  }
+
+  .about-project__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-project__title {
+    font-size: 20px;
+    line-height: 25px;
+    margin-top: 9px;
+  }
+
+  .about-project__article {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+    width: 100%;
+  }
+
+  .about-project__description {
+    font-size: 12px;
+    line-height: 18px;
+    padding-top: 22px;
+  }
+
+  .about-project__timeframe {
+    grid-template-columns: 140px auto;
+    grid-template-rows: 36px 36px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 37px;
+  }
+
+  .about-project__timeframe-theme {
+    padding-top: 14px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .about-project {
+    padding: 110px 70px 104px;
+  }
+  
+  .about-project__article {
+    column-gap: 40px;
+  }
+
+  .about-project__description {
+    font-size: 14px;
+    line-height: 20px;
+    padding-top: 26px;
+  }
+
+  .about-project__timeframe {
+    grid-template-columns: 228px auto;
+    margin-top: 55px;
+  }
+}
